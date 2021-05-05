@@ -17,7 +17,7 @@ const operadoresRoutes = require("./api/routes/operadores");
 const tecnicosRoutes = require("./api/routes/tecnicos");
 
 // realiza a conexão com o banco de dados, com a senha para o cluster armazenada em uma variável de ambiente.
-mongoose.connect("mongodb+srv://admin-bruno:"+ process.env.MONGO_ATLAS_PW + "@cluster0.sydlt.mongodb.net/projetos2DB?retryWrites=true&w=majority",
+mongoose.connect("mongodb+srv://" + process.env.MONGO_ATLAS_USER + ":" + process.env.MONGO_ATLAS_PW + "@cluster0.sydlt.mongodb.net/projetos2DB?retryWrites=true&w=majority",
 {
     useNewUrlParser: true, 
     useUnifiedTopology: true 
