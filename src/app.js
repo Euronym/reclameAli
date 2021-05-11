@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 // módulo para a variável de ambiente.
 const dotenv = require("dotenv");
 
+var cors = require('cors')
+  
 const bodyParser = require("body-parser");
 
 dotenv.config();
@@ -16,19 +18,19 @@ const reclamacoesRoutes = require("./api/routes/reclamacoes");
 const operadoresRoutes = require("./api/routes/operadores");
 const tecnicosRoutes = require("./api/routes/tecnicos");
 
+mongoose.connect('mongodb://localhost:27017/projetos2DB', {useNewUrlParser: true, useUnifiedTopology: true});
+
 // realiza a conexão com o banco de dados, com a senha para o cluster armazenada em uma variável de ambiente.
+/*
 mongoose.connect("mongodb+srv://" + process.env.MONGO_ATLAS_USER + ":" + process.env.MONGO_ATLAS_PW + "@cluster0.sydlt.mongodb.net/projetos2DB?retryWrites=true&w=majority",
 {
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 }
 ).catch(err => console.log(err));
-
+*/
 const app = express();
-// inicia a conexão do servidor com a porta 3000
-app.listen(3000, ()=> {
-    console.log("connection started at port 3000.");
-});
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());

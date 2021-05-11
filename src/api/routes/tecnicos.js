@@ -5,29 +5,44 @@ const router = express.Router();
 
 const Tecnico = require("../models/tecnicoModel");
 
-router.post("/", (req,res) => {
-
-    res.status(200).json({message: "post request"});
-});
 // obtém informações da primeira reclamação na lista.
-router.get("/:tecnicoId", (req,res) => {
-    const id = req.params.tecnicoId;
-    if(id === 'special')
-        res.status(200).json({message: "you picked the special id"});
-    else
-        res.status(200).json({message: "you haven't picked the special id"});
+router.get("/tecnicos/:tecnicoId", (req,res) => {
 
+    Tecnico.findOne({estaDiponivel: true}, (err, tecnico) => {
+        if(err){
+            res.status(500).json({
+                "error": err
+            });
+        }
+        else{
+            res.status(200).send(tecnico);
+        }
+    });
+});
+router.get("/tecnicos", (req, res) => {
+
+    Tecnico.find({estaDiponivel: true}, (err, tecnicos) => {
+        if(err){
+            res.status(500).json({
+                "error": err
+            });
+        }
+        if(!tecnicos.length){
+            res.status(404).json({
+                "Mensagem": "não há tecnicos disponíveis para atendimento."
+            });
+        }
+        else{
+            res.status(200).json({
+                "tecnicos_diponiveis": Tecnico.count(),
+                "lista_tecnicos":  tecnicos
+            });
+        }
+    });
 });
 router.patch("/:tecnicoId", (req,res) => {
-
-    res.status(200).json({message: "post request"});
-});
-router.delete("/:tecnicoId", (req,res) => {
-    const id = req.params.tecnicoId;
-    if(id === 'special')
-        res.status(200).json({message: "you picked the special id"});
-    else
-        res.status(200).json({message: "you haven't picked the special id"});
+    
+    Tecnico.updateOne({email: req.body.email},{$set:{estaDiponivel: req.body.estaDiponivel} } );
 
 });
 
