@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 // módulo para a variável de ambiente.
 const dotenv = require("dotenv");
 
-const bodyParser = require("body-parser");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -25,13 +25,16 @@ mongoose.connect("mongodb+srv://" + process.env.MONGO_ATLAS_USER + ":" + process
 ).catch(err => console.log(err));
 
 const app = express();
-// inicia a conexão do servidor com a porta 3000
-app.listen(3000, ()=> {
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json()) 
+
+app.use(cors());
+app.use(morgan('dev'));
+
+app.listen(3000, () =>{
     console.log("connection started at port 3000.");
 });
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 
 // utiliza as rotas solicitadas para atender pedidos.
 app.use('/reclamacoes', reclamacoesRoutes);
@@ -52,5 +55,3 @@ app.use((req, res, next) => {
         message: error.message
     });     
 });
-
-module.exports = app;

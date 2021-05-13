@@ -4,7 +4,8 @@ const { Schema } = mongoose;
 
 const reclamacaoSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    tipoReclamacao: Number,
+    unidadeConsumidora: Number,
+    tipoReclamacao: String,
     prioridadeAssociada: Number,
     local:{
         CEP: Number,

@@ -1,39 +1,17 @@
 const express = require("express");
-const mongoose = require("mongoose");
 
 const router = express.Router();
 
-const Operador = require("../models/operadorModel");
+const operadorController = require("../controllers/operadorController");
 
-router.post("/", (req,res) => {
-    const login = req.body.login;
-    const senha = req.body.senha;
+router.post("/", operadorController.create_one);
+    
+router.get("/", operadorController.get_all);
 
-    res.status(200).json({
-        "login": login,
-        "senha": senha
-        });
-});
-router.get("/:operadorId", (req,res) => {
-    const id = req.params.operadorId;
-    if(id === 'special')
-        res.status(200).json({"message": "you picked the special id"});
-    else
-        res.status(200).json({"message": "you haven't picked the special id"});
+router.get("/:operadorId", operadorController.get_one);
 
-});
-router.patch("/:operadorId", (req,res) => {
-    const email = req.body.email;
-    const login = req.body.login;
-});
-router.delete("/:operadorId", (req,res) => {
-    const id = req.params.operadorId;
-    if(id === 'special')
-        res.status(200).json({"message": "you picked the special id"});
-    else
-        res.status(200).json({"message": "you haven't picked the special id"});
+router.patch("/:operadorId", operadorController.edit_one);
 
-});
-
+router.delete("/:operadorId", operadorController.remove_one);
 
 module.exports = router;
