@@ -55,9 +55,10 @@ function calcularReclamacao(tipoReclamacao){
  * 
  * @returns a reclamação de maior prioridade.
  */
-function maiorPrioridade(){
+function sortPrioridade(){
+
     
-    Reclamacao.find({});
+    
 }
     
 module.exports = {
