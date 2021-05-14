@@ -6,9 +6,10 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 // módulo para a variável de ambiente.
 const dotenv = require("dotenv");
-
+// módulo para a conexão externa.
 const cors = require("cors");
 
+// configura as variáveis de ambiente a serem utilizadas.
 dotenv.config();
 
 // faz as solicitações para as rotas.
@@ -26,10 +27,13 @@ mongoose.connect("mongodb+srv://" + process.env.MONGO_ATLAS_USER + ":" + process
 
 const app = express();
 
+// permite a passagem de JSON e url encoded às requisições.
 app.use(express.urlencoded({extended: true}));
 app.use(express.json()) 
 
+// permite a conexão entre diferentes hosts.
 app.use(cors());
+// obtém estatistícas relacionadas à conexão com o banco de dados.
 app.use(morgan('dev'));
 
 app.listen(3000, () =>{

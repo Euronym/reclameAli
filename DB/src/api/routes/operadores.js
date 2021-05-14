@@ -4,7 +4,7 @@ const router = express.Router();
 
 const operadorController = require("../controllers/operadorController");
 
-router.post("/", operadorController.create_one);
+router.post("/signup", operadorController.create_one);
     
 router.get("/", operadorController.get_all);
 

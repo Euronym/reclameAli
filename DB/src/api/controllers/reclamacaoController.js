@@ -55,26 +55,26 @@ function calcularReclamacao(tipoReclamacao){
  * 
  * @returns a reclamação de maior prioridade.
  */
-function sortPrioridade(){
+function getFirst(){
 
-    
-    
 }
     
 module.exports = {
 
     async store(req, res){
 
-        await Cliente.findOne({unidadeConsumidora: req.body.unidadeConsumidora}, (err, cliente) => {
+        let tipoReclamacao = req.body.tipoReclamacao;
+        let unidadeConsumidora = req.body.unidadeConsumidora;
+
+        await Cliente.findOne({unidadeConsumidora: unidadeConsumidora}, (err, cliente) => {
             if(err){
-                console.log(err);
+                res.status(500).json({erro: err});
             }
             if(!cliente){
                 res.status(404).json({mensagem:"usuário não encontrado."});
             }
             else{
-                let tipoReclamacao = req.body.tipoReclamacao;
-                let unidadeConsumidora = req.body.unidadeConsumidora;
+              
                 // verifica se a reclamação informada é um número dentro do intervalo estabelecido.
                 if(Number.isInteger(tipoReclamacao) && tipoReclamacao >= 1 && tipoReclamacao <= 3){
                     const reclamacao = new Reclamacao({
@@ -100,7 +100,10 @@ module.exports = {
 
         await Reclamacao.find({}, (err, reclamacao) =>{
             if(err){
-                console.log(err);
+                res.status(500).json({erro: err});
+            }
+            if(!reclamacao.length){
+                res.status(404).json({mensagem: "nenhuma reclamação encontrada."});
             }
             else{
                 res.status(200).send(reclamacao);
@@ -111,7 +114,7 @@ module.exports = {
 
        await Reclamacao.findOne({_id: req.body.reclamacaoId}, (err, reclamacao) => {
             if(err){
-                console.log(err);
+                res.status(500).json({erro: err});
             }
             if(!reclamacao){
                 res.status(404).json({mensagem:"reclamacao não encontrada."});
@@ -124,7 +127,7 @@ module.exports = {
     async delete_one(req, res){
         await Reclamacao.findOneAndRemove({_id: req.body.reclamacaoId}, (err, reclamacao) => {
             if(err){
-                console.log(err);
+                res.status(500).json({erro: err});
             }
             if(!reclamacao){
                 res.status(404).json({mensagem:"reclamacao não encontrada."});

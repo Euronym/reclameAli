@@ -4,12 +4,12 @@ const router = express.Router();
 
 const tecnicoController = require("../controllers/tecnicoController");
 
-router.post("/", );
+router.post("/", tecnicoController.add_one);
 
-router.get("/:tecnicoId", );
+router.get("/:tecnicoId", tecnicoController.get_one);
 
-router.patch("/:tecnicoId", );
+router.patch("/:tecnicoId", tecnicoController.edit_state);
 
-router.delete("/:tecnicoId", );
+router.delete("/:tecnicoId", tecnicoController.delete_one);
 
 module.exports = router;

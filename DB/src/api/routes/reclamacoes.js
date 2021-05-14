@@ -1,7 +1,5 @@
 const express = require("express");
 
-const mongoose = require("mongoose");
-
 const router = express.Router();
 
 const reclamacaoController = require("../controllers/reclamacaoController");
