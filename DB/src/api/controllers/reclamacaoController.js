@@ -61,6 +61,10 @@ function getFirst(){
     
 module.exports = {
 
+    /**  Rota para a inserção de reclamações no banco de dados. 
+    *    Necessita do tipo da reclamação(tipoReclamacao) e da
+    *   unidade consumidora do cliente.
+    */ 
     async store(req, res){
 
         let tipoReclamacao = req.body.tipoReclamacao;
@@ -71,24 +75,30 @@ module.exports = {
                 res.status(500).json({erro: err});
             }
             if(!cliente){
-                res.status(404).json({mensagem:"usuário não encontrado."});
+                res.status(422).json({mensagem:"usuário não encontrado."});
             }
             else{
               
                 // verifica se a reclamação informada é um número dentro do intervalo estabelecido.
-                if(Number.isInteger(tipoReclamacao) && tipoReclamacao >= 1 && tipoReclamacao <= 3){
+                if(Number.isInteger(Number(tipoReclamacao)) && tipoReclamacao >= 1 && tipoReclamacao <= 3){
                     const reclamacao = new Reclamacao({
                         _id: new mongoose.Types.ObjectId(),
                         unidadeConsumidora: unidadeConsumidora,
                         tipoReclamacao: calcularReclamacao(tipoReclamacao),
                         prioridadeAssociada: tipoReclamacao,
                         local: {
-                            CEP: cliente.CEP,
+                            cep: cliente.cep,
                             complemento: cliente.complemento
                         }
                     });
-                    reclamacao.save();
-                    res.status(201).json({message:"handling posts", reclamacao: reclamacao});
+                    reclamacao.save().then(_response => {
+                        res.status(201).json({
+                            message:"reclamação feita com sucesso.", 
+                            reclamacao: reclamacao
+                        });
+                    }).catch(err => {
+                        res.status(500).json({erro: err});
+                    });
                 }      
                 else{
                     res.status(404).json({message: "reclamação inválida."});

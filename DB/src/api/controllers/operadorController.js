@@ -14,7 +14,7 @@ module.exports = {
         
         switch(opcao){
             case 1:
-                Operador.findOneAndUpdate({email: req.body.email}, {telefone: req.body.telefone},
+                await Operador.findOneAndUpdate({email: req.body.email}, {telefone: req.body.telefone},
                     null, (err, telefone) => {
                         if(err){
                             res.status(500).json({erro: err});
@@ -56,7 +56,7 @@ module.exports = {
             else{
 
                 // verifica se o email fornecido pelo usuário já encontra-se na base de dados.
-                await Operador.find({email: email}, (err, operadores) => {
+                Operador.find({email: email}, (err, operadores) => {
                     if(err){
                         res.status(500).json({erro: err});
                     }
@@ -73,11 +73,14 @@ module.exports = {
                             },
                             cargo: cargo
                         });
-                        operador.save();
-                        res.status(201).json({mensagem: "usuário criado com sucesso."});
+                        operador.save().then(request => {
+                            res.status(201).json({mensagem: "usuário criado com sucesso."});
+                        }).catch(err => {
+                            res.status(500).json({erro: err});
+                        });
                     }
                     else{
-                        res.status(404).json({mensagem:"Não foi possível prosseguir: usuário já existe. "});
+                        res.status(409).json({mensagem:"Não foi possível prosseguir: usuário já existe. "});
                     }        
                 });         
             }

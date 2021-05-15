@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 
 const reclamacaoSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    unidadeConsumidora: Number,
+    unidadeConsumidora: String,
     tipoReclamacao: String,
     prioridadeAssociada: Number,
     local:{
-        CEP: Number,
+        cep: Number,
         complemento: String
     }
 }, {timestamps: true},);

@@ -19,3 +19,4 @@ const clienteSchema = new Schema({
 });
 
 module.exports = mongoose.model("Cliente",clienteSchema);
+
