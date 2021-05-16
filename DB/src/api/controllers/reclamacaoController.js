@@ -31,10 +31,10 @@ const prioridades = {
     reclamações poderiam ser armazenadas no próprio banco de dados, dando liberdade à não
     programadores de criar suas próprias reclamações.
 
-    @param tipoReclamacao o tipo da reclamação fornecida pelo usuário.
+    @param prioridadeAssociada o tipo da reclamação fornecida pelo usuário.
     @returns a string associada com aquele número.
 */
-function calcularReclamacao(tipoReclamacao){
+function calcularReclamacao(prioridadeAssociada){
     let returnReclamacao;
 
     switch(tipoReclamacao){
@@ -67,7 +67,7 @@ module.exports = {
     */ 
     async store(req, res){
 
-        let tipoReclamacao = req.body.tipoReclamacao;
+        let prioridadeAssociada = req.body.prioridadeAssociada;
         let unidadeConsumidora = req.body.unidadeConsumidora;
 
         await Cliente.findOne({unidadeConsumidora: unidadeConsumidora}, (err, cliente) => {
@@ -80,12 +80,12 @@ module.exports = {
             else{
               
                 // verifica se a reclamação informada é um número dentro do intervalo estabelecido.
-                if(Number.isInteger(Number(tipoReclamacao)) && tipoReclamacao >= 1 && tipoReclamacao <= 3){
+                if(Number.isInteger(Number(prioridadeAssociada)) && prioridadeAssociada >= 1 && prioridadeAssociada <= 3){
                     const reclamacao = new Reclamacao({
                         _id: new mongoose.Types.ObjectId(),
                         unidadeConsumidora: unidadeConsumidora,
-                        tipoReclamacao: calcularReclamacao(tipoReclamacao),
-                        prioridadeAssociada: tipoReclamacao,
+                        tipoReclamacao: String(calcularReclamacao(prioridadeAssociada)),
+                        prioridadeAssociada: prioridadeAssociada,
                         local: {
                             cep: cliente.cep,
                             complemento: cliente.complemento
