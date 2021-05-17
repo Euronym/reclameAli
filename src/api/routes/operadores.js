@@ -6,7 +6,7 @@ const operadorController = require("../controllers/operadorController");
 
 router.post("/signup", operadorController.create_one);
     
-router.get("/:operadorId", operadorController.get_one);
+router.get("/login", operadorController.get_one);
 
 router.patch("/:operadorId", operadorController.edit_one);
 

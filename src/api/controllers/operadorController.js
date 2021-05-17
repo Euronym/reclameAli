@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
     // modifica algum dos dados previamente informados pelo usuário.
-    //TODO  MODIFICAR SENHA E TELEFONE.
     async edit_one(req, res){
 
         let opcao = req.body.opcao;
@@ -32,9 +31,10 @@ module.exports = {
                     });
                 break;
             case 2:
-            
-                break;
-            case 3:
+                await Operador.findOneAndUpdate({email: req.body.email}, {telefone: req.body.telefone},
+                    null, (err, telefone) => {
+                        
+                    });
                 break;
             default:
                 res.status(404).json({mensagem: "opção inválida."});
@@ -49,14 +49,14 @@ module.exports = {
         let telefone = req.body.telefone;
         let email = req.body.email;
          // faz a criptografia da senha.
-        let senha = bcrypt.hash(req.body.email, 10, (err, hash) => {
+        bcrypt.hash(req.body.senha, 10, (err, hash) => {
             if(err){
                 res.status(500).json({erro: err});
             }
             else{
 
                 // verifica se o email fornecido pelo usuário já encontra-se na base de dados.
-                Operador.find({email: email}, (err, operadores) => {
+                await Operador.find({email: email}, (err, operadores) => {
                     if(err){
                         res.status(500).json({erro: err});
                     }
@@ -69,7 +69,7 @@ module.exports = {
                                 nome: nome,
                                 telefone: telefone,
                                 email: email,
-                                senha: senha
+                                senha: hash
                             },
                             cargo: cargo
                         });
@@ -107,7 +107,7 @@ module.exports = {
         let email = req.body.email;
         let senha = req.body.senha;
 
-        Operador.findOne({email: email, senha: senha}, (err, operador) => {
+        await Operador.findOne({email: email}, (err, operador) => {
             if(err){
                 res.status(500).json({erro: err});
             }

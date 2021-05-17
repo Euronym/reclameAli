@@ -8,23 +8,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/claudio966/reclameAli.git"
+    "url": "git+https://github.com/Euronym/reclameAli.git"
   },
   "author": "Bruno Martins, Claudio Modesto, Danilo Ren, Pedro Rendeiro, Gabriel Fernandes",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/claudio966/reclameAli/issues"
+    "url": "https://github.com/Euronym/reclameAli/issues"
   },
-  "homepage": "https://github.com/claudio966/reclameAli#readme",
+  "homepage": "https://github.com/Euronym/reclameAli#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "heroku": "^7.53.1",
     "mongoose": "^5.12.3",
     "morgan": "^1.10.0",
-    "telegraf": "^4.3.0"
+    "telegraf": "^4.3.0",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
