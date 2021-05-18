@@ -7,8 +7,8 @@ const operadorSchema = new Schema({
   usuario: {   
     nome: {type: String, required: true},
     telefone: {type: Number, required:true},
-    email: {Type: String, required: true, unique: true},
-    senha: {Type: String, required: true},
+    email: {type: String, required: true, unique: true},
+    senha: {type: String, required: true},
   },
   cargo: String,
 });
