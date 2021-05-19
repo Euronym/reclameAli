@@ -35,9 +35,10 @@ const prioridades = {
     @returns a string associada com aquele número.
 */
 function calcularReclamacao(prioridadeAssociada){
+
     let returnReclamacao;
 
-    switch(tipoReclamacao){
+    switch(prioridadeAssociada){
         case 1:
             returnReclamacao = prioridades.prioridade_1.tipo_reclamacao;
             break;

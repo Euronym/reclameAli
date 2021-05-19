@@ -21,7 +21,7 @@ const tecnicosRoutes = require("./api/routes/tecnicos");
 mongoose.connect("mongodb+srv://" + process.env.MONGO_ATLAS_USER + ":" + process.env.MONGO_ATLAS_PW + "@cluster0.sydlt.mongodb.net/projetos2DB?retryWrites=true&w=majority",
 {
     useNewUrlParser: true, 
-    useUnifiedTopology: true 
+    useUnifiedTopology: true,
 }
 ).catch(err => console.log(err));
 

@@ -10,33 +10,33 @@ module.exports = {
        await Tecnico.findOne({_id :req.body.tecnicoId}).
        then(tecnico => {
             if(!tecnico){
-                res.status(404).json({mensagem: "não há técnicos registrados."});
+                return res.status(404).json({mensagem: "não há técnicos registrados."});
             }
             else{  
                 Tecnico.updateOne({_id: req.body.tecnicoId}, {estaDisponivel: !tecnico.estaDisponivel}, (err, tecnico) => {
                     if(err){
-                        res.status(500).json({erro: err});
+                        return res.status(500).json({erro: err});
                     }
                     else{
-                        res.status(200).json({mensagem: "estado alterado com sucesso."});
+                        return res.status(200).json({mensagem: "estado alterado com sucesso."});
                     }
                 });
             }
        }).catch(err => {
-            res.status(500).json({erro: err});
+            return res.status(500).json({erro: err});
        });
     },
     // obtém todos os técnicos registrados.
     async get_all(req, res){
         await Tecnico.find({}, (err, tecnicos) => {
             if(err){
-                res.status(500).json({erro: err});
+                return res.status(500).json({erro: err});
             }
             if(!tecnicos.length){
-                res.status(404).json({mensagem: "não há tecnicos disponíveis."});
+                return res.status(404).json({mensagem: "não há tecnicos disponíveis."});
             }
             else{
-                res.status(200).json(err);
+                return res.status(200).json(err);
             }
         });
     },
@@ -44,13 +44,13 @@ module.exports = {
     async get_one(req, res){
         await Tecnico.find({nome: req.body.nome}, (err, tecnicos) => {
             if(err){
-                res.status(500).json({erro: err});
+                return res.status(500).json({erro: err});
             }
             if(!tecnicos.length){
-                res.status(404).json({mensagem: "Não há técnicos disponíveis."});
+                return res.status(404).json({mensagem: "Não há técnicos disponíveis."});
             }
             else{
-                res.status(200).json(tecnicos);
+                return res.status(200).json(tecnicos);
             }
         });
     },
@@ -63,7 +63,7 @@ module.exports = {
         let nome = req.body.nome;
 
         // faz o hash da senha criada pelo usuário e verifica a existência de possíveis erros.
-        bcrypt.hash(req.body.senha, 10).then(result => {
+        bcrypt.hash(req.body.senha, 10).then(hash => {
 
             Tecnico.find({email: email}).exec().then(tecnicos => {
                 if(!tecnicos.length){
@@ -73,27 +73,27 @@ module.exports = {
                         nome: nome,
                         telefone: telefone,
                         email: email,
-                        senha: senha
+                        senha: hash
                         },
                         estaDisponivel: true
                     });   
-                    tecnico.save().then(request => {
-                        res.status(201).json({mensagem: "usuário criado com sucesso."});
+                    tecnico.save().then(_request => {
+                        return res.status(201).json({mensagem: "usuário criado com sucesso."});
                     })
                     .catch(err => {
-                        res.status(500).json({erro: err});
+                        return res.status(500).json({erro: err});
                     });
                 }
                 else{
-                    res.status(409).json({mensagem: "não foi possível prosseguir: usuário já existe."});
+                    return res.status(409).json({mensagem: "não foi possível prosseguir: usuário já existe."});
                 }
             })
             .catch(err => {
-                res.status(500).json({erro: err});
+                return res.status(500).json({erro: err});
             });
         })
         .catch(err => {
-            res.status(500).json({erro: err});
+            return res.status(500).json({erro: err});
         });
     },
     // remove um dos técnicos.
@@ -101,13 +101,13 @@ module.exports = {
 
         await Tecnico.findOneAndRemove({_id: req.body.tecnicoId}, (err, tecnico) => {
             if(err){
-                res.status(500).json({erro: err});
+                return res.status(500).json({erro: err});
             }
             if(!tecnico){
-                res.status(404).json({mensagem: "técnico inexistente."});
+                return res.status(404).json({mensagem: "técnico inexistente."});
             }
             else{
-                res.status(200).json({mensagem: "tecnico removido."});
+                return res.status(200).json({mensagem: "tecnico removido."});
             }
         });
     }

@@ -4,7 +4,7 @@ const router = express.Router();
 
 const tecnicoController = require("../controllers/tecnicoController");
 
-router.post("/", tecnicoController.add_one);
+router.post("/signup", tecnicoController.add_one);
 
 router.get("/:tecnicoId", tecnicoController.get_one);
 

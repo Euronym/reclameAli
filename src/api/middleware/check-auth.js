@@ -17,7 +17,11 @@ module.exports = (req, res, next) => {
         solicitação. Um erro é retornado em caso de falhas no acesso.
     */
     try{
-        const decodificar = jwt.verify(req.body.token, process.env.JWT_KEY);
+        // verifica o cabeçalho da solicitação em busca do token.
+        const token = req.headers.authorization.split(" ")[1];
+
+        // verifica se o token informado é válido.
+        const decodificar = jwt.verify(token, process.env.JWT_KEY);
         req.dadosUsuario = decodificar;
         next();
 
