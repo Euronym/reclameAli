@@ -85,7 +85,7 @@ module.exports = {
                     const reclamacao = new Reclamacao({
                         _id: new mongoose.Types.ObjectId(),
                         unidadeConsumidora: unidadeConsumidora,
-                        tipoReclamacao: String(calcularReclamacao(prioridadeAssociada)),
+                        tipoReclamacao: String(calcularReclamacao(Number(prioridadeAssociada))),
                         prioridadeAssociada: prioridadeAssociada,
                         local: {
                             cep: cliente.cep,

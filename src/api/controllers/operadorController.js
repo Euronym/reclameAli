@@ -13,14 +13,14 @@ const checkAut = require("../middleware/check-auth");
 // biblioteca para a utilização de funções relacionadas à criptografia.
 const bcrypt = require('bcrypt');
 
-dotenv.config();
+dotenv.config({path: '../.env'});
 
 module.exports = {
     // método para apresentação. Em uma situação real não estaria aqui, mas clientes precisam ser 
     // inseridos para teste.
     async create_client(req, res){
 
-        await Client.find({email: req.body.email}).exec()
+        await Cliente.find({email: req.body.email}).exec()
         .then(clientes => {
             if(!clientes.length){
                 
@@ -29,6 +29,7 @@ module.exports = {
                     const cliente = new Cliente({
                         _id: new mongoose.Types.ObjectId(),
                         nome: req.body.nome,
+                        senha: hash,
                         telefone: req.body.telefone,
                         email: req.body.email,
                         cpf: req.body.cpf,
@@ -211,7 +212,7 @@ module.exports = {
     },
     // remove um dos operadores do banco de dados.
     async remove_one(req, res){
-        
+
         let email = req.body.email;
 
         await Operador.findOne({email: email}, (err, operador) => {

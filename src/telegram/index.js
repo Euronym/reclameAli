@@ -1,17 +1,31 @@
-const { Telegraf } = require('telegraf')
+const https = require("https");
+
+const express = require("express");
 
 const dotenv = require("dotenv");
 
-dotenv.config();
+const app = express();
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+dotenv.config({ path: '../.env' });
 
-bot.use(async (ctx, next) => {
-  const start = new Date();
-  await next();
-  const ms = new Date() - start;
-  console.log('Response time: %sms', ms);
-})
+const url = "https://api.telegram.org/bot" + process.env.BOT_TOKEN + "/";
 
-bot.on('text', (ctx) => ctx.reply('Hello World'));
-bot.launch();
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+app.listen(3000, () => {
+  console.log("connection started at 3000.");
+
+});
+
+https.get((url + 'getUpdates'), (res) => {
+
+  res.on("data", (data) => {
+    console.log(JSON.parse(data));
+
+  });
+});
+
+
+

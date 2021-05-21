@@ -36,8 +36,8 @@ app.use(cors());
 // obtém estatistícas relacionadas à conexão com o banco de dados.
 app.use(morgan('dev'));
 
-app.listen(3000, () =>{
-    console.log("connection started at port 3000.");
+app.listen(process.env.PORT, () =>{
+    console.log("connection started at port " + process.env.PORT);
 });
 
 // utiliza as rotas solicitadas para atender pedidos.
