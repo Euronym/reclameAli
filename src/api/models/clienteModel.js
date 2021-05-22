@@ -16,7 +16,7 @@ const clienteSchema = new Schema({
   senha: {type: String, required: true},
   cpf: {type: Number,required: true, unique: true},
   rg: {type: Number,required: true, unique: true},
-  unidadeConsumidora: {type: Number,required: true},
+  unidadeConsumidora: {type: Number,required: true, unique: true},
   estaRegular: Boolean,
   cep: {type: Number,required: true},
   complemento: String

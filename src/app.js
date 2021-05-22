@@ -12,6 +12,10 @@ const cors = require("cors");
 // configura as variáveis de ambiente a serem utilizadas.
 dotenv.config();
 
+// solicita o módulo que contém o chatbot.
+
+require("./telegram/index");
+
 // faz as solicitações para as rotas.
 const reclamacoesRoutes = require("./api/routes/reclamacoes");
 const operadoresRoutes = require("./api/routes/operadores");
@@ -22,6 +26,7 @@ mongoose.connect("mongodb+srv://" + process.env.MONGO_ATLAS_USER + ":" + process
 {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
+    useCreateIndex: true
 }
 ).catch(err => console.log(err));
 
@@ -35,10 +40,6 @@ app.use(express.json())
 app.use(cors());
 // obtém estatistícas relacionadas à conexão com o banco de dados.
 app.use(morgan('dev'));
-
-app.listen(process.env.PORT, () =>{
-    console.log("connection started at port " + process.env.PORT);
-});
 
 // utiliza as rotas solicitadas para atender pedidos.
 app.use('/reclamacoes', reclamacoesRoutes);
@@ -59,3 +60,4 @@ app.use((req, res, next) => {
         message: error.message
     });     
 });
+module.exports = app;

@@ -11,12 +11,12 @@ const Cliente = require("../models/clienteModel");
 */
 const prioridades = {
     "prioridade_1": {
-        "tipo_reclamacao": "reestabelecimento do fornecimento de energia",
+        "tipo_reclamacao": "Reestabelecimento do fornecimento de energia",
         "prioridade_associada": "1"
     },
 
     "prioridade_2": {
-        "tipo_reclamacao": "falta de energia",
+        "tipo_reclamacao": "Falta de energia",
         "prioridade_associada": "2"
     },
 
@@ -34,11 +34,11 @@ const prioridades = {
     @param prioridadeAssociada o tipo da reclamação fornecida pelo usuário.
     @returns a string associada com aquele número.
 */
-function calcularReclamacao(prioridadeAssociada){
+function calcularReclamacao(prioridadeAssociada) {
 
     let returnReclamacao;
 
-    switch(prioridadeAssociada){
+    switch (prioridadeAssociada) {
         case 1:
             returnReclamacao = prioridades.prioridade_1.tipo_reclamacao;
             break;
@@ -56,32 +56,32 @@ function calcularReclamacao(prioridadeAssociada){
  * 
  * @returns a reclamação de maior prioridade.
  */
-function getFirst(){
+function getFirst() {
 
 }
-    
+
 module.exports = {
 
     /**  Rota para a inserção de reclamações no banco de dados. 
     *    Necessita do tipo da reclamação(tipoReclamacao) e da
     *   unidade consumidora do cliente.
-    */ 
-    async store(req, res){
+    */
+    async store(req, res) {
 
         let prioridadeAssociada = req.body.prioridadeAssociada;
         let unidadeConsumidora = req.body.unidadeConsumidora;
 
-        await Cliente.findOne({unidadeConsumidora: unidadeConsumidora}, (err, cliente) => {
-            if(err){
-                res.status(500).json({erro: err});
+        await Cliente.findOne({ unidadeConsumidora: unidadeConsumidora }, (err, cliente) => {
+            if (err) {
+                res.status(500).json({ erro: err });
             }
-            if(!cliente){
-                res.status(422).json({mensagem:"usuário não encontrado."});
+            if (!cliente) {
+                res.status(422).json({ mensagem: "usuário não encontrado." });
             }
-            else{
-              
+            else {
+
                 // verifica se a reclamação informada é um número dentro do intervalo estabelecido.
-                if(Number.isInteger(Number(prioridadeAssociada)) && prioridadeAssociada >= 1 && prioridadeAssociada <= 3){
+                if (Number.isInteger(Number(prioridadeAssociada)) && prioridadeAssociada >= 1 && prioridadeAssociada <= 3) {
                     const reclamacao = new Reclamacao({
                         _id: new mongoose.Types.ObjectId(),
                         unidadeConsumidora: unidadeConsumidora,
@@ -94,57 +94,57 @@ module.exports = {
                     });
                     reclamacao.save().then(_response => {
                         res.status(201).json({
-                            message:"reclamação feita com sucesso.", 
+                            message: "reclamação feita com sucesso.",
                             reclamacao: reclamacao
                         });
                     }).catch(err => {
-                        res.status(500).json({erro: err});
+                        res.status(500).json({ erro: err });
                     });
-                }      
-                else{
-                    res.status(404).json({message: "reclamação inválida."});
+                }
+                else {
+                    res.status(404).json({ message: "reclamação inválida." });
                 }
             }
         });
     },
-    async get_all(req,res){
+    async get_all(req, res) {
 
-        await Reclamacao.find({}, (err, reclamacao) =>{
-            if(err){
-                res.status(500).json({erro: err});
+        await Reclamacao.find({}, (err, reclamacao) => {
+            if (err) {
+                res.status(500).json({ erro: err });
             }
-            if(!reclamacao.length){
-                res.status(404).json({mensagem: "nenhuma reclamação encontrada."});
+            if (!reclamacao.length) {
+                res.status(404).json({ mensagem: "nenhuma reclamação encontrada." });
             }
-            else{
+            else {
                 res.status(200).send(reclamacao);
             }
         });
     },
-    async get_one(req, res){
+    async get_one(req, res) {
 
-       await Reclamacao.findOne({_id: req.body.reclamacaoId}, (err, reclamacao) => {
-            if(err){
-                res.status(500).json({erro: err});
+        await Reclamacao.findOne({ _id: req.body.reclamacaoId }, (err, reclamacao) => {
+            if (err) {
+                res.status(500).json({ erro: err });
             }
-            if(!reclamacao){
-                res.status(404).json({mensagem:"reclamacao não encontrada."});
+            if (!reclamacao) {
+                res.status(404).json({ mensagem: "reclamacao não encontrada." });
             }
-            else{
+            else {
                 res.status(200).send(reclamacao);
             }
-       });
+        });
     },
-    async delete_one(req, res){
-        await Reclamacao.findOneAndRemove({_id: req.body.reclamacaoId}, (err, reclamacao) => {
-            if(err){
-                res.status(500).json({erro: err});
+    async delete_one(req, res) {
+        await Reclamacao.findOneAndRemove({ _id: req.body.reclamacaoId }, (err, reclamacao) => {
+            if (err) {
+                res.status(500).json({ erro: err });
             }
-            if(!reclamacao){
-                res.status(404).json({mensagem:"reclamacao não encontrada."});
+            if (!reclamacao) {
+                res.status(404).json({ mensagem: "reclamacao não encontrada." });
             }
-            else{
-                res.status(200).json({mensagem:"reclamacao deletada com sucesso."});
+            else {
+                res.status(200).json({ mensagem: "reclamacao deletada com sucesso." });
             }
         });
     }
