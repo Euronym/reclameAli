@@ -130,14 +130,20 @@ module.exports = {
                     var First;
                     for(i=0; i<reclamacao.length; i++){ 
                         //Busca todas as reclamações com cada tipo de prioridade e guarda em uma array específico
+                        var i3 = 0;
+                        var i2 = 0;
+                        var i1 = 0;
                         if(reclamacao[i].prioridadeAssociada == 3){
-                            reclamacao_prioridade3[i] = reclamacao[i];
+                            reclamacao_prioridade3[i3] = reclamacao[i];
+                            i3++;
                         }
                         if(reclamacao[i].prioridadeAssociada == 2){
-                            reclamacao_prioridade2[i] = reclamacao[i];
+                            reclamacao_prioridade2[i2] = reclamacao[i];
+                            i2++;
                         }
                         if(reclamacao[i].prioridadeAssociada == 1){
-                            reclamacao_prioridade1[i] = reclamacao[i];
+                            reclamacao_prioridade1[i1] = reclamacao[i];
+                            i1++;
                         }
                     }
                     if(reclamacao_prioridade3.length){ //Verifica se há alguma reclamação com prioridade 3
