@@ -77,7 +77,7 @@ bot.hears(opcao, (ctx) => {
 // aguarda a mensagem informada pelo usuário antes de realizar uma nova execução.
 bot.on('text', (ctx) => {
   if (Number.isInteger(Number(ctx.message.text))) {
-    Cliente.findOne({ unidadeConsumidora: ctx.message.text }, (err, cliente) => {
+    Cliente.findOne({ unidadeConsumidora: Number(ctx.message.text) }, (err, cliente) => {
       if (err) {
         console.log(err);
         ctx.reply("Um erro aconteceu, por favor tente novamente.");
