@@ -14,7 +14,7 @@ dotenv.config();
 
 // solicita o módulo que contém o chatbot.
 
-require("./telegram/index");
+// require("./telegram/index");
 
 // faz as solicitações para as rotas.
 const reclamacoesRoutes = require("./api/routes/reclamacoes");
