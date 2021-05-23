@@ -146,8 +146,8 @@ module.exports = {
                             return res.status(200).json(First);
                         } else{
                             for(i=0; i<reclamacao_prioridade3.length-1; i++){ //Caso haja mais, compara qual foi criada antes
-                                var time1 = new Date(reclamacao_prioridade3[i].createdAt)
-                                var time2 = new Date(reclamacao_prioridade3[i+1].createdAt)
+                                var time1 = Date(reclamacao_prioridade3[i].createdAt)
+                                var time2 = Date(reclamacao_prioridade3[i+1].createdAt)
                                 if(time1.getTime() > time2.getTime()){
                                     First = reclamacao_prioridade3[i+1];
                                 }
@@ -160,8 +160,8 @@ module.exports = {
                             return res.status(200).json(First);
                         } else{
                             for(i=0; i<reclamacao_prioridade2.length-1; i++){ //Caso haja mais, compara qual foi criada antes
-                                var time1 = new Date(reclamacao_prioridade2[i].createdAt)
-                                var time2 = new Date(reclamacao_prioridade2[i+1].createdAt)
+                                var time1 = Date(reclamacao_prioridade2[i].createdAt)
+                                var time2 = Date(reclamacao_prioridade2[i+1].createdAt)
                                 if(time1.getTime() > time2.getTime()){
                                     First = reclamacao_prioridade2[i+1];
                                 }
@@ -174,8 +174,8 @@ module.exports = {
                             return res.status(200).json(First);
                         } else{
                             for(i=0; i<reclamacao_prioridade1.length-1; i++){ //Caso haja mais, compara qual foi criada antes
-                                var time1 = new Date(reclamacao_prioridade1[i].createdAt)
-                                var time2 = new Date(reclamacao_prioridade1[i+1].createdAt)
+                                var time1 = Date(reclamacao_prioridade1[i].createdAt)
+                                var time2 = Date(reclamacao_prioridade1[i+1].createdAt)
                                 if(time1.getTime() > time2.getTime()){
                                     First = reclamacao_prioridade1[i+1];
                                 }
