@@ -86,6 +86,7 @@ bot.on('text', (ctx) => {
         ctx.reply("A unidade consumidora informada é inválida.");
       }
       else {
+        // Feita a autenticação do usuário, podemos exibir as opções de reclamação suportadas pelo serviço.
         console.log(cliente);
         unidadeConsumidora = ctx.message.text;
         ctx.telegram.sendMessage(ctx.chat.id, " Olá " + cliente.nome + ".\n" + second_message,

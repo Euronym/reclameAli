@@ -171,43 +171,41 @@ module.exports = {
     },
     // função responsável pelo login de um usuário.
     async login(req, res) {
-        Operador.findOne({ email: req.body.email })
-            .exec()
-            .then(operador => {
-                if (!operador) {
-                    return res.status(404).json({ mensagem: "Falha na autenticação." });
-                }
-                else {
-                    bcrypt.compare(req.body.senha, operador.senha, (err, resultado) => {
-                        if (err) {
-                            res.status(500).json({ erro: err });
-                        }
-                        if (resultado) {
-                            // fornece ao usuário um token que contém dados relevantes de sua conta.
-                            const token = jwt.sign(
-                                {
-                                    email: operador.email,
-                                    operadorId: operador.id
-                                },
-                                process.env.JWT_KEY,
-                                {
-                                    expiresIn: "1h" // define a validade do token como 1hr.
-                                });
-                            res.status(200).json({
-                                mensagem: "autenticação feita com sucesso.",
-                                token: token
+        await Operador.findOne({ email: req.body.email })
+        .then(operador => {
+            if (!operador) {
+                return res.status(404).json({ mensagem: "Falha na autenticação." });
+            }
+            else {
+                bcrypt.compare(req.body.senha, operador.senha, (err, resultado) => {
+                    if (err) {
+                        return res.status(500).json({ erro: err });
+                    }
+                    if (resultado) {
+                        // fornece ao usuário um token que contém dados relevantes de sua conta.
+                        const token = jwt.sign(
+                            {
+                                email: operador.email,
+                                operadorId: operador.id
+                            },
+                            process.env.JWT_KEY,
+                            {
+                                expiresIn: "1h" // define a validade do token como 1hr.
                             });
-                        }
-                        else {
-                            res.status(401).json({ mensagem: "falha na autenticação." });
-                        }
-                    });
-                    return;
-                }
-            })
-            .catch(err => {
-                return res.status(500).json({ erro: err });
-            });
+                        return res.status(200).json({
+                            mensagem: "autenticação feita com sucesso.",
+                            token: token
+                        });
+                    }
+                    else {
+                        return res.status(401).json({ mensagem: "falha na autenticação." });
+                    }
+                });
+            }
+        })
+        .catch(err => {
+            return res.status(500).json({ erro: err });
+        });
     },
     // remove um dos operadores do banco de dados.
     async remove_one(req, res) {
