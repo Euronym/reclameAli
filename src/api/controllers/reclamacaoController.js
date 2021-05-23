@@ -51,15 +51,6 @@ function calcularReclamacao(prioridadeAssociada) {
     }
     return returnReclamacao;
 }
-/**
- *  Obtem a reclamação de maios prioridade entre aquelas da lista.
- * 
- * @returns a reclamação de maior prioridade.
- */
-function getFirst() {
-
-}
-
 module.exports = {
 
     /**  Rota para a inserção de reclamações no banco de dados. 
@@ -73,10 +64,10 @@ module.exports = {
 
         await Cliente.findOne({ unidadeConsumidora: unidadeConsumidora }, (err, cliente) => {
             if (err) {
-                res.status(500).json({ erro: err });
+                return res.status(500).json({ erro: err });
             }
             if (!cliente) {
-                res.status(422).json({ mensagem: "usuário não encontrado." });
+                return res.status(422).json({ mensagem: "usuário não encontrado." });
             }
             else {
 
@@ -102,7 +93,7 @@ module.exports = {
                     });
                 }
                 else {
-                    res.status(404).json({ message: "reclamação inválida." });
+                    return res.status(404).json({ message: "reclamação inválida." });
                 }
             }
         });
@@ -111,13 +102,82 @@ module.exports = {
 
         await Reclamacao.find({}, (err, reclamacao) => {
             if (err) {
-                res.status(500).json({ erro: err });
+                return res.status(500).json({ erro: err });
             }
             if (!reclamacao.length) {
-                res.status(404).json({ mensagem: "nenhuma reclamação encontrada." });
+                return res.status(404).json({ mensagem: "nenhuma reclamação encontrada." });
             }
             else {
-                res.status(200).send(reclamacao);
+                return res.status(200).send(reclamacao);
+            }
+        });
+    },
+    async get_priority(req, res){
+        await Reclamacao.find({}, (err, reclamacao) => {
+            if (err) {
+                return res.status(500).json({ erro: err });
+            }
+            if (!reclamacao.length) { //Verifica se há alguma reclamação registrada
+                return res.status(404).json({ mensagem: "nenhuma reclamação encontrada." });
+            }
+            else {
+                if(reclamacao.length == 1){ //Se houver só uma reclamação, já retorna, não precisa procurar por prioridade
+                    return res.status(200).json(reclamacao[0]);
+                } else{
+                    var reclamacao_prioridade3 = [];
+                    var reclamacao_prioridade2 = [];
+                    var reclamacao_prioridade1 = [];
+                    var First;
+                    for(i=0; i<reclamacao.length; i++){ 
+                        //Busca todas as reclamações com cada tipo de prioridade e guarda em uma array específico
+                        if(reclamacao[i].prioridadeAssociada == 3){
+                            reclamacao_prioridade3[i] = reclamacao[i];
+                        }
+                        if(reclamacao[i].prioridadeAssociada == 2){
+                            reclamacao_prioridade2[i] = reclamacao[i];
+                        }
+                        if(reclamacao[i].prioridadeAssociada == 1){
+                            reclamacao_prioridade1[i] = reclamacao[i];
+                        }
+                    }
+                    if(reclamacao_prioridade3.length){ //Verifica se há alguma reclamação com prioridade 3
+                        First = reclamacao_prioridade3[0]
+                        if(reclamacao_prioridade3.length == 1){ //Caso haja só uma, retorna logo
+                            return res.status(200).json(First);
+                        } else{
+                            for(i=0; i<reclamacao_prioridade3.length-1; i++){ //Caso haja mais, compara qual foi criada antes
+                                if(reclamacao_prioridade3[i].created_at.getTime()>reclamacao_prioridade3[i+1].created_at.getTime()){
+                                    First = reclamacao_prioridade3[i+1];
+                                }
+                            }
+                            return First;
+                        }
+                    } else if(reclamacao_prioridade2.length){ //Verifica se há alguma reclamação com prioridade 2
+                        First = reclamacao_prioridade2[0]
+                        if(reclamacao_prioridade2.length == 1){ //Caso haja só uma, retorna logo
+                            return res.status(200).json(First);
+                        } else{
+                            for(i=0; i<reclamacao_prioridade2.length-1; i++){ //Caso haja mais, compara qual foi criada antes
+                                if(reclamacao_prioridade2[i].created_at.getTime()>reclamacao_prioridade2[i+1].created_at.getTime()){
+                                    First = reclamacao_prioridade2[i+1];
+                                }
+                            }
+                            return res.status(200).json(First);
+                        }
+                    } else{ //Se chegar aqui, não há reclamações de prioridade 3 nem 2, então verifica se há alguma reclamação com prioridade 1
+                        First = reclamacao_prioridade1[0]
+                        if(reclamacao_prioridade1.length == 1){ //Caso haja só uma, retorna logo
+                            return res.status(200).json(First);
+                        } else{
+                            for(i=0; i<reclamacao_prioridade1.length-1; i++){ //Caso haja mais, compara qual foi criada antes
+                                if(reclamacao_prioridade1[i].created_at.getTime()>reclamacao_prioridade1[i+1].created_at.getTime()){
+                                    First = reclamacao_prioridade1[i+1];
+                                }
+                            }
+                            return res.status(200).json(First);
+                        }
+                    }
+                }
             }
         });
     },
@@ -125,26 +185,26 @@ module.exports = {
 
         await Reclamacao.findOne({ _id: req.body.reclamacaoId }, (err, reclamacao) => {
             if (err) {
-                res.status(500).json({ erro: err });
+                return res.status(500).json({ erro: err });
             }
             if (!reclamacao) {
-                res.status(404).json({ mensagem: "reclamacao não encontrada." });
+                return res.status(404).json({ mensagem: "reclamacao não encontrada." });
             }
             else {
-                res.status(200).send(reclamacao);
+                return res.status(200).send(reclamacao);
             }
         });
     },
     async delete_one(req, res) {
         await Reclamacao.findOneAndRemove({ _id: req.body.reclamacaoId }, (err, reclamacao) => {
             if (err) {
-                res.status(500).json({ erro: err });
+                return res.status(500).json({ erro: err });
             }
             if (!reclamacao) {
-                res.status(404).json({ mensagem: "reclamacao não encontrada." });
+                return res.status(404).json({ mensagem: "reclamacao não encontrada." });
             }
             else {
-                res.status(200).json({ mensagem: "reclamacao deletada com sucesso." });
+                return res.status(200).json({ mensagem: "reclamacao deletada com sucesso." });
             }
         });
     }
