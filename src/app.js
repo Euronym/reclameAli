@@ -26,7 +26,9 @@ mongoose.connect("mongodb+srv://" + process.env.MONGO_ATLAS_USER + ":" + process
 {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    ssl: true,
+    sslValidate: false
 }
 ).catch(err => console.log(err));
 
