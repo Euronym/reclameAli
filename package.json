@@ -2,10 +2,10 @@
   "name": "reclameali",
   "version": "1.0.0",
   "description": "Projeto de um servico de reclamacoes ",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",

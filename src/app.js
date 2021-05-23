@@ -27,12 +27,14 @@ mongoose.connect("mongodb+srv://" + process.env.MONGO_ATLAS_USER + ":" + process
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useCreateIndex: true,
-    ssl: true,
-    sslValidate: false
 }
 ).catch(err => console.log(err));
 
 const app = express();
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log("connection started!");
+});
 
 // permite a passagem de JSON e url encoded às requisições.
 app.use(express.urlencoded({extended: true}));
@@ -62,4 +64,3 @@ app.use((req, res, next) => {
         message: error.message
     });     
 });
-module.exports = app;
