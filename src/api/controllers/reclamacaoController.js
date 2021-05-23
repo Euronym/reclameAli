@@ -150,7 +150,7 @@ module.exports = {
                                     First = reclamacao_prioridade3[i+1];
                                 }
                             }
-                            return First;
+                            return res.status(200).json(First);
                         }
                     } else if(reclamacao_prioridade2.length){ //Verifica se há alguma reclamação com prioridade 2
                         First = reclamacao_prioridade2[0]
