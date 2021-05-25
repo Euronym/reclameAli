@@ -98,6 +98,7 @@ module.exports = {
             }
         });
     },
+    // obtém todas as reclamações do banco de dados.
     async get_all(req, res) {
 
         await Reclamacao.find({}, (err, reclamacao) => {
@@ -112,6 +113,7 @@ module.exports = {
             }
         });
     },
+    // obtém a reclamação de maior prioridade entre aquelas disponíveis no banco.
     async get_priority(req, res){
         await Reclamacao.find({}, (err, reclamacao) => {
             if (err) {

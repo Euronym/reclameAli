@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// define o esquema utilizado para uma reclamação no banco de dados, com todos os atributos necessários.
 const reclamacaoSchema = new Schema({
     _id: mongoose.Schema.Types.ObjectId,
     unidadeConsumidora: {type: String,required: true},

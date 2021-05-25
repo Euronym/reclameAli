@@ -1,13 +1,14 @@
+// módulo para a implementação do chatbot.
 const {Telegraf} = require("telegraf");
-
+// módulo para gerenciamento do banco de dados.
 const mongoose = require("mongoose");
-
+// importa o modelo para instanciação da reclamação.
 const Reclamacao = require("../api/models/reclamacaoModel");
-
+// importa o modelo para autenticação do cliente.
 const Cliente = require("../api/models/clienteModel");
-
+// importa o módulo para configuração das variáveis de ambiente.
 const dotenv = require("dotenv");
-
+// indica o caminho do arquivo em que as variáveis se encontram e configura.
 dotenv.config({ path: "../.env" });
 
 // as reclamações disponíveis no banco de dados.
@@ -68,6 +69,10 @@ let unidadeConsumidora;
 bot.start((ctx) => {
   ctx.reply(first_message);
 });
+/*
+  basicamente, aqui são definidas algumas respostas para possíveis mensagens dos clientes. 
+  Como essas mensagens são em partes triviais, nos limitamos a responder com a própria mensagem.
+*/
 let opcao = ['oi', 'olá', 'ola', 'boa tarde', 'bom dia', 'boa noite', 'tudo bem', 'como está?'];
 bot.hears(opcao, (ctx) => {
   msg = ctx.message.text;
@@ -86,9 +91,10 @@ bot.on('text', (ctx) => {
         ctx.reply("A unidade consumidora informada é inválida.");
       }
       else {
-        // Feita a autenticação do usuário, podemos exibir as opções de reclamação suportadas pelo serviço.
+        // exibe no terminal informações do cliente que realizou a reclamação.
         console.log(cliente);
         unidadeConsumidora = ctx.message.text;
+        // Feita a autenticação do usuário, podemos exibir as opções de reclamação suportadas pelo serviço.
         ctx.telegram.sendMessage(ctx.chat.id, " Olá " + cliente.nome + ".\n" + second_message,
           {
             reply_markup: {
@@ -107,6 +113,17 @@ bot.on('text', (ctx) => {
     ctx.reply("Desculpe, não consigo atender a sua solicitação: dados inválidos.");
   }
 });
+/**
+ * Função para criação de uma reclamação. Obtidas e autenticadas as informações do cliente, é possível 
+ * adicionar o recurso criado no banco de dados. Para isso, alguns dados são deduzidos pelo sistema como
+ * por exemplo, o tipo da reclamação. Além disso, alguns erros podem ocorrer durante a instanciação dessa
+ * reclamação. Com isso em mente, uma promessa é retornada indicando se tudo ocorreu bem ou não.
+ * 
+ * 
+ * @param prioridadeAssociada prioridade associada à reclamação feita. 
+ * @returns o tipo da reclamação a ser armazenada no banco de dados em caso de sucesso, o erro em caso
+ * de fracasso.
+ */
 function create_reclamacao(prioridadeAssociada){
 
   return new Promise( (resolve, reject) => {
@@ -138,7 +155,11 @@ function create_reclamacao(prioridadeAssociada){
     });
   });
 }
+/* 
+  passa diferentes parâmetros para a função dependendo da opção selecionada. cada diferente
+  parâmetro irá gerar uma diferente reclamação a ser armazenada no banco de dados.
 
+*/
 bot.action("1", async (ctx) => {
   create_reclamacao(1)
   .then(_result => {
@@ -166,7 +187,6 @@ bot.action("3", async (ctx) => {
     ctx.reply("Um erro aconteceu, por favor tente novamente.");
   });
 });
-
 bot.launch();
 
 

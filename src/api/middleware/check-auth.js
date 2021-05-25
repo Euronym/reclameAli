@@ -1,6 +1,9 @@
 /*
 *   Arquivo para a verificação de autenticações: verifica se o usuário possui permissão para
 *  acessar determinado recurso fornecido pela api. 
+*
+*   Infelizmente, essa atualização de segurança não pode ser implementada no código final por conta
+*   do tempo disponível, mas poderia facilmente ser adicionada nas rotas para garantir o acesso seguro.
 */
 const jwt = require("jsonwebtoken");
 

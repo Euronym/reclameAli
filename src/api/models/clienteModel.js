@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// define o esquema utilizado para um cliente no banco de dados, com todos os atributos necessários.
 const clienteSchema = new Schema({
-  _id: mongoose.Schema.Types.ObjectId, 
+  _id: mongoose.Schema.Types.ObjectId, // incrementa automaticamente a id de cada cliente dentro do banco.
   nome: {type: String, required: true},
   telefone: {type: Number, required: true},
   email: {
@@ -21,5 +22,5 @@ const clienteSchema = new Schema({
   cep: {type: Number,required: true},
   complemento: String
 });
-
+// exporta o modelo criado.
 module.exports = mongoose.model("Cliente",clienteSchema);

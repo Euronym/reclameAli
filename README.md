@@ -26,7 +26,7 @@ https://shielded-island-23034.herokuapp.com/
     POST https://shielded-island-23034.herokuapp.com/operadores/login
 
 - REGISTRAR OPERADOR
-      
+    
       
 
 - REGISTRAR TÉCNICO

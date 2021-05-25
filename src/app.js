@@ -13,7 +13,6 @@ const cors = require("cors");
 dotenv.config();
 
 // solicita o módulo que contém o chatbot.
-
 require("./telegram/index");
 
 // faz as solicitações para as rotas.
@@ -50,14 +49,14 @@ app.use('/reclamacoes', reclamacoesRoutes);
 app.use('/operadores', operadoresRoutes);
 app.use('/tecnicos', tecnicosRoutes);
 
-// rotas default para o caso de possíveis erros no atendimento de solicitação
+// rota para o caso do acesso de uma possível rota não existente, exibindo o erro 404.
 app.use((req, res, next) => {
     const error = new Error('not found');
     // retorna 404 por não conseguir encontrar o recurso buscado.
     error.status = 404;
     next(error);
 });
-
+// relata problemas desconhecidos no acesso à determinada URL, diagnosticando um erro 500.
 app.use((req, res, next) => { 
     res.status(error.status || 500);
     res.json({
