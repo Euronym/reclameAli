@@ -73,13 +73,13 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
 
     - Um técnico
     
-      GET https://shielded-island-23034.herokuapp.com/tecnicos/:tecnicoId
+    GET https://shielded-island-23034.herokuapp.com/tecnicos/:tecnicoId
       
  - REMOVER TÉCNICO
 
-     DELETE https://shielded-island-23034.herokuapp.com/tecnicos/:tecnicoId
+   DELETE https://shielded-island-23034.herokuapp.com/tecnicos/:tecnicoId
 
 - REGISTRAR USUÁRIO
 
-    POST  https://shielded-island-23034.herokuapp.com/operadores/clienteRegister
+   POST  https://shielded-island-23034.herokuapp.com/operadores/clienteRegister
 
