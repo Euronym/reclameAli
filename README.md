@@ -1,3 +1,7 @@
+<p align="center">
+<img src="http://linc.ufpa.br/amaru-mts/content/img/ufpa.png" alt="UFPA" width="200"/>
+</p>
+
 # API Desenvolvida para a disciplina de projetos II.
 
 ## RAIZ DA API
