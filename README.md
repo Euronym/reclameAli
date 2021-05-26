@@ -1,5 +1,3 @@
-![alt text]()
-
 # API Desenvolvida para a disciplina de projetos II.
 
 - RAIZ DA API
@@ -8,30 +6,17 @@
     
 Abaixo, é possível encontrar uma lista das operações suportadas e seus respectivos links de acesso.
 
-
 - OBTER RECLAMAÇÃO
 
     - Uma reclamação
    
     GET https://shielded-island-23034.herokuapp.com/reclamacoes/:reclamacaoId
-              
-        - Parâmetros necessários
-            
-            - _id: Object
-            
+
     GET https://shielded-island-23034.herokuapp.com/reclamacoes/top-priority
-    
-        - Parâmetros necessários
-       
-            - nenhum
-           
+
     - Múltiplas reclamações
 
     GET https://shielded-island-23034.herokuapp.com/reclamacoes/reclamacoes
-    
-        - Parâmetros necessários
-            
-            - nenhum
 
 - REGISTRAR RECLAMAÇÃO
 
@@ -39,65 +24,81 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
      
     POST https://shielded-island-23034.herokuapp.com/reclamacoes
     
-        - Parâmetros necessários
-        
-            - unidadeConsumidora: String
-            - tipoReclamacao: String 
-    
-- REMOVER RECLAMAÇÃO
+ - REMOVER RECLAMAÇÃO
     
     - Uma reclamação
 
     DELETE https://shielded-island-23034.herokuapp.com/reclamacoes/:reclamacaoId
     
-        - Parâmetros necessários
+    - Parâmetros necessários
     
-            - _id: Object
+        -   _id: Object
+        -   email: String
+        -   senha: String
     
 - LOGAR COMO OPERADOR
     
     POST https://shielded-island-23034.herokuapp.com/operadores/login
     
-        - Parâmetros necessários
+    - Parâmetros necessários
    
-            - email: String
-            - senha: String  
+        -   email: String
+        -   senha: String  
 
 - REGISTRAR OPERADOR
 
     POST https://shielded-island-23034.herokuapp.com/operadores/signup
     
-        - Parâmetros necessários
+    - Parâmetros necessários
     
-            - nome: String
-            - telefone: Number
-            - email: String
-            - senha: String
-            - cargo: String
+        -   nome: String
+        -   telefone: Number
+        -   email: String
+        -   senha: String
+        -   cargo: String
     
 - ATUALIZAR OPERADOR
 
     PATCH https://shielded-island-23034.herokuapp.com/operadores/:operadorId
+    - Parâmetros necessários (Arg1 | Arg2)
+        -   email: String
+        -   telefone: Number
     
  - REMOVER OPERADOR
  
     DELETE https://shielded-island-23034.herokuapp.com/tecnicos/:operadorId
-     
+    - Parâmetros necessários
+        -   email: String
+        -   senha: String
+
 - REGISTRAR TÉCNICO
  
     POST  https://shielded-island-23034.herokuapp.com/tecnicos/signup
+    - Parâmetros necessários
+        -   _id: Object
+        -   nome: String
+        -   telefone: Number
+        -   email: String
+        -   senha: String
     
 - OBTER TÉCNICO
 
-    - Um técnico
+    ### Um técnico
+    - Parâmetros necessários
+        -   nome: String
+    ### Todos os técnicos
+    - Parâmetros necessários
+        -   nenhum
     
     GET https://shielded-island-23034.herokuapp.com/tecnicos/:tecnicoId
       
  - REMOVER TÉCNICO
 
    DELETE https://shielded-island-23034.herokuapp.com/tecnicos/:tecnicoId
+   - Parâmetros necessários
+        - _id: Object
 
-- REGISTRAR USUÁRIO
+- REGISTRAR CLIENTE
 
    POST  https://shielded-island-23034.herokuapp.com/operadores/clienteRegister
 
