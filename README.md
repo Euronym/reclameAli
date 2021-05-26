@@ -18,15 +18,15 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
 
     GET https://shielded-island-23034.herokuapp.com/reclamacoes/reclamacoes
 
-- REGISTRAR RECLAMAÇÃO
+## REGISTRAR RECLAMAÇÃO
 
     - Uma reclamação
      
     POST https://shielded-island-23034.herokuapp.com/reclamacoes
     
- - REMOVER RECLAMAÇÃO
+## REMOVER RECLAMAÇÃO
     
-    - Uma reclamação
+     - Uma reclamação
 
     DELETE https://shielded-island-23034.herokuapp.com/reclamacoes/:reclamacaoId
     
@@ -36,7 +36,7 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
         -   email: String
         -   senha: String
     
-- LOGAR COMO OPERADOR
+## LOGAR COMO OPERADOR
     
     POST https://shielded-island-23034.herokuapp.com/operadores/login
     
@@ -45,7 +45,7 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
         -   email: String
         -   senha: String  
 
-- REGISTRAR OPERADOR
+## REGISTRAR OPERADOR
 
     POST https://shielded-island-23034.herokuapp.com/operadores/signup
     
@@ -57,21 +57,21 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
         -   senha: String
         -   cargo: String
     
-- ATUALIZAR OPERADOR
+## ATUALIZAR OPERADOR
 
     PATCH https://shielded-island-23034.herokuapp.com/operadores/:operadorId
     - Parâmetros necessários (Arg1 | Arg2)
         -   email: String
         -   telefone: Number
     
- - REMOVER OPERADOR
+## REMOVER OPERADOR
  
     DELETE https://shielded-island-23034.herokuapp.com/tecnicos/:operadorId
     - Parâmetros necessários
         -   email: String
         -   senha: String
 
-- REGISTRAR TÉCNICO
+## REGISTRAR TÉCNICO
  
     POST  https://shielded-island-23034.herokuapp.com/tecnicos/signup
     - Parâmetros necessários
@@ -81,7 +81,7 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
         -   email: String
         -   senha: String
     
-- OBTER TÉCNICO
+## OBTER TÉCNICO
 
     ### Um técnico
     - Parâmetros necessários
@@ -92,13 +92,13 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
     
     GET https://shielded-island-23034.herokuapp.com/tecnicos/:tecnicoId
       
- - REMOVER TÉCNICO
+## REMOVER TÉCNICO
 
    DELETE https://shielded-island-23034.herokuapp.com/tecnicos/:tecnicoId
    - Parâmetros necessários
         - _id: Object
 
-- REGISTRAR CLIENTE
+## REGISTRAR CLIENTE
 
    POST  https://shielded-island-23034.herokuapp.com/operadores/clienteRegister
    - Parâmetros necessários
