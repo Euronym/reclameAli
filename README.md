@@ -1,4 +1,4 @@
-![alt text](https://www.pngix.com/pngfile/middle/441-4419689_braso-ufpa-federal-university-of-par-hd-png.png)
+![alt text]()
 
 # API Desenvolvida para a disciplina de projetos II.
 
