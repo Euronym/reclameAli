@@ -68,13 +68,11 @@ module.exports = {
             Tecnico.find({ email: email }).exec().then(tecnicos => {
                 if (!tecnicos.length) {
                     const tecnico = new Tecnico({
-                        _id: new mongoose.Types.ObjectId(),
-                        usuario: {
-                            nome: nome,
-                            telefone: telefone,
-                            email: email,
-                            senha: hash
-                        },
+                        _id: new mongoose.Types.ObjectId(),  
+                        nome: nome,
+                        telefone: telefone,
+                        email: email,
+                        senha: hash,
                         estaDisponivel: true
                     });
                     tecnico.save().then(_request => {
