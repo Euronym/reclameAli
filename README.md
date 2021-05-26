@@ -6,17 +6,30 @@
     
 Abaixo, é possível encontrar uma lista das operações suportadas e seus respectivos links de acesso.
 
+
 - OBTER RECLAMAÇÃO
 
     - Uma reclamação
    
     GET https://shielded-island-23034.herokuapp.com/reclamacoes/:reclamacaoId
-
+              
+        - Parâmetros necessários
+            
+            - _id: Object
+            
     GET https://shielded-island-23034.herokuapp.com/reclamacoes/top-priority
-
+    
+        - Parâmetros necessários
+       
+            - nenhum
+           
     - Múltiplas reclamações
 
     GET https://shielded-island-23034.herokuapp.com/reclamacoes/reclamacoes
+    
+        - Parâmetros necessários
+            
+            - nenhum
 
 - REGISTRAR RECLAMAÇÃO
 
@@ -24,17 +37,20 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
      
     POST https://shielded-island-23034.herokuapp.com/reclamacoes
     
- - REMOVER RECLAMAÇÃO
+        - Parâmetros necessários
+        
+            - unidadeConsumidora: String
+            - tipoReclamacao: String 
+    
+- REMOVER RECLAMAÇÃO
     
     - Uma reclamação
 
     DELETE https://shielded-island-23034.herokuapp.com/reclamacoes/:reclamacaoId
     
-    - Parâmetros necessários
+        - Parâmetros necessários
     
-        -   _id: Object
-        -   email: String
-        -   senha: String
+            - _id: Object
     
 - LOGAR COMO OPERADOR
     
@@ -42,8 +58,8 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
     
     - Parâmetros necessários
    
-        -   email: String
-        -   senha: String  
+            - email: String
+            - senha: String  
 
 - REGISTRAR OPERADOR
 
@@ -51,11 +67,11 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
     
     - Parâmetros necessários
     
-        -   nome: String
-        -   telefone: Number
-        -   email: String
-        -   senha: String
-        -   cargo: String
+            - nome: String
+            - telefone: Number
+            - email: String
+            - senha: String
+            - cargo: String
     
 - ATUALIZAR OPERADOR
 
