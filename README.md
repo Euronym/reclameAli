@@ -101,4 +101,16 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
 - REGISTRAR CLIENTE
 
    POST  https://shielded-island-23034.herokuapp.com/operadores/clienteRegister
+   - Parâmetros necessários
+        - _id: Object
+        - nome: String
+        - senha: String
+        - telefone: Number
+        - email: String
+        - cpf: Number
+        - rg: Number
+        - unidadeConsumidora: Number
+        - estaRegular: Boolean
+        - cep: Number
+        - complemento: String
 
