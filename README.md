@@ -79,7 +79,6 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
  
     POST  https://shielded-island-23034.herokuapp.com/tecnicos/signup
     - Parâmetros necessários
-        -   _id: Object
         -   nome: String
         -   telefone: Number
         -   email: String
@@ -106,7 +105,6 @@ Abaixo, é possível encontrar uma lista das operações suportadas e seus respe
 
     POST  https://shielded-island-23034.herokuapp.com/operadores/clienteRegister
     - Parâmetros necessários
-        - _id: Object
         - nome: String
         - senha: String
         - telefone: Number
