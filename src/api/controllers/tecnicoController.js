@@ -37,7 +37,7 @@ module.exports = {
                 return res.status(404).json({ mensagem: "não há tecnicos disponíveis." });
             }
             else {
-                return res.status(200).json(err);
+                return res.status(200).json(tecnicos);
             }
         });
     },

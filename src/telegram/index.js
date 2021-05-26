@@ -78,7 +78,6 @@ bot.hears(opcao, (ctx) => {
   msg = ctx.message.text;
   ctx.reply(msg);
 });
-
 // aguarda a mensagem informada pelo usuário antes de realizar uma nova execução.
 bot.on('text', (ctx) => {
   if (Number.isInteger(Number(ctx.message.text))) {
