@@ -8,6 +8,8 @@ const tecnicoController = require("../controllers/tecnicoController");
 router.post("/signup", tecnicoController.add_one);
 // rota para obter um técnico do banco de dados, utilizando para isso a sua id.
 router.get("/:tecnicoId", tecnicoController.get_one);
+// rota para obter todos os técnicos do banco de dados
+router.get("/", tecnicoController.get_all);
 // rota para atualização de um técnico no banco de dados.
 router.patch("/:tecnicoId", tecnicoController.edit_state);
 // rota para remoção de um técnico no banco de dados.
