@@ -1,12 +1,12 @@
 # API Desenvolvida para a disciplina de projetos II.
 
-- RAIZ DA API
+## RAIZ DA API
 
     https://shielded-island-23034.herokuapp.com/
     
 Abaixo, é possível encontrar uma lista das operações suportadas e seus respectivos links de acesso.
 
-- OBTER RECLAMAÇÃO
+## OBTER RECLAMAÇÃO
 
     - Uma reclamação
    
